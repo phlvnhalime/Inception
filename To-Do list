@@ -1,0 +1,16 @@
+1-) installation mariadb (database)
+    - Folder type: There must be a docker file into the srcs/requirements/mariadb/
+    - dockerfile: install a mariadb using an alphine-based images
+2-) wordpress + PHP-FPM installation
+    - Folder type: There must be a docker file into the srcs/requirements/wordpress
+        and also a script file that will be automatically set up
+    - Connection: must be connected to the mariadb container
+    - Functionality: must be able to install wordpress and configure it
+3-) Update Docker compose file:
+    - services: must be updated to include mariadb and wordpress services
+    - volumes: must be updated to include mariadb and wordpress volumes
+    - networks: be sure that all containers are connected to the same network "inception"
+4-) Missing documentation:
+    - README.md: must be updated to include the new configuration
+    - USER-DOC.md: It is a guide for users.
+    - DEV-DOC.md: It is a guide for developers.
