@@ -19,8 +19,6 @@ services:
     build:
       context: requirements/mariadb
       dockerfile: Dockerfile
-    ports:
-      - "3306:3306"
     volumes:
       - mariadb:/var/lib/mysql
     networks:
@@ -31,7 +29,24 @@ services:
       - db_root_password
       - db_user_password
     restart: always
-    
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: requirements/wordpress
+      dockerfile: Dockerfile
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - inception
+    env_file:
+      - .env
+    secrets:
+      - db_user_password
+      - admin_password
+    depends_on:
+      - mariadb
+    restart: always
 
 volumes:
   wordpress:
@@ -59,5 +74,7 @@ secrets:
     file: ../secrets/db_root_password.txt
   db_user_password:
     file: ../secrets/db_user_password.txt
+  admin_password:
+    file: ../secrets/admin_password.txt
 
 
