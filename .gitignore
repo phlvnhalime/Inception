@@ -1,0 +1,28 @@
+
+# Ignore environment files
+.env
+
+# Ignore document files
+*.pdf
+*.docx
+
+# Ignore editor swap files
+*.swp
+*.swo
+*~
+.Makefile.swp
+
+# Ignore personal notes and todo lists
+To-Do list
+TODO
+*.todo
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore build artifacts
+*.log
+build/
+dist/
+

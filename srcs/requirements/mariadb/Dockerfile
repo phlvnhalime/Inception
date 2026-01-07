@@ -3,8 +3,8 @@ FROM alpine:3.19
 RUN apk update && apk upgrade && apk add --no-cache mariadb mariadb-client
 
 # -R flag applies the ownership change to all files and subdirectories.
-RUN mkdir -p /var/lib/mysql /run/mysql && \
-    chown -R mysql:mysql /var/lib/mysql /run/mysql
+RUN mkdir -p /var/lib/mysql /run/mysql /run/mysqld && \
+    chown -R mysql:mysql /var/lib/mysql /run/mysql /run/mysqld
 
 # stream editor to modify the configuration file
 # sed -i 's|pattern|replacement|g' file 
