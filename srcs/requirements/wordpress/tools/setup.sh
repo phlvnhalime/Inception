@@ -12,7 +12,7 @@ if [ ! -f index.php ]; then
 
     wp core install \
     --url=$DOMAIN_NAME \
-    --title=$WP_TITLE \
+    --title="$WP_TITLE" \
     --admin_user=$ADMIN_USER \
     --admin_password=$(cat /run/secrets/admin_password) \
     --admin_email=$ADMIN_EMAIL \
