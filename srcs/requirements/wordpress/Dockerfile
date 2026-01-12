@@ -11,10 +11,14 @@ RUN apk update && apk upgrade && apk add --no-cache \
     php82-fileinfo \
     php82-openssl \
     php82-xml \
+    php82-tokenizer\
+    php82-ctype \
     php82-phar \
+    php82-mbstring \
     wget \
     unzip \
-    curl
+    curl \
+    netcat-openbsd
 
 # Increase PHP memory limit for WordPress download
 # RUN echo "memory_limit = 256M" >> /etc/php8/php.ini || echo "memory_limit = 256M" >> /etc/php83/php.ini || echo "memory_limit = 256M" >> /etc/php/php.ini
@@ -40,4 +44,4 @@ EXPOSE 9000
 
 ENTRYPOINT ["/bin/sh", "/usr/local/bin/setup.sh"]
 
-CMD ["php-fpm"]
+CMD ["php-fpm82", "-F"]
