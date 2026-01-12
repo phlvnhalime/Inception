@@ -17,6 +17,14 @@ if [ ! -f index.php ]; then
     --admin_password=$(cat /run/secrets/admin_password) \
     --admin_email=$ADMIN_EMAIL \
     --allow-root
+
+    wp user create \
+    $USER_LOGIN \
+    $USER_EMAIL \
+    --role=author \
+    --user_pass=$USER_PASS \
+    --allow-root
+
 fi
 
 # Find and start PHP-FPM

@@ -40,4 +40,4 @@ EXPOSE 9000
 
 ENTRYPOINT ["/bin/sh", "/usr/local/bin/setup.sh"]
 
-#CMD ["php-fpm"]
+CMD ["php-fpm"]
