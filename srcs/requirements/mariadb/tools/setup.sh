@@ -15,10 +15,26 @@ if [ ! -d /var/lib/mysql/mysql ]; then
     cat << EOF > /tmp/init.sql
 USE mysql;
 FLUSH PRIVILEGES;
+-- Create the application database
 CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\`;
+-- Create user for remote connections (Wordpress container)
 CREATE USER IF NOT EXISTS \`$MYSQL_USER\`@'%' IDENTIFIED BY '$USER_PASSWORD';
 GRANT ALL PRIVILEGES ON \`$MYSQL_DATABASE\`.* TO \`$MYSQL_USER\`@'%';
+-- Create user for localhost connections (terminal access)
+CREATE USER IF NOT EXISTS \`$MYSQL_USER\`@'localhost' IDENTIFIED BY '$USER_PASSWORD';
+GRANT ALL PRIVILEGES ON \`$MYSQL_DATABASE\`.* TO \`$MYSQL_USER\`@'localhost';
+-- Secure root user: set password and restrict to localhost only
 ALTER USER 'root'@'localhost' IDENTIFIED BY '$ROOT_PASSWORD';
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost','127.0.0.1', '::1');
+
+-- Remove anonymous users for security
+DELETE FROM mysql.user WHERE User='';
+
+-- Remote test database and access to it
+DROP DATABASE IF EXIST test;
+DELETE FROM mysql.db WHERE Db='test' OR Db="test\\_%';
+
+-- Apply all privilege changes 
 FLUSH PRIVILEGES;
 EOF
 
